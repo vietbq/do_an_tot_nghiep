@@ -1,0 +1,1 @@
+{"upload_term":"{\"device\":\"TERM_01\",\"term\":\"14\"}","f2":"{\"device\":\"LED_01\",\"status\":\"0\"}","f3":"{\"device\":\"LED_03\",\"status\":\"1\"}","turn_off":"{\"device\":\"LED01\",\"status\":\"0\"}"}
