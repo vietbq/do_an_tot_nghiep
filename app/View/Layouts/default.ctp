@@ -14,12 +14,13 @@
         <link href="assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="assets/fonts/css/font-awesome.min.css" rel="stylesheet">
         <link href="assets/css/animate.min.css" rel="stylesheet">
+        
 
         <!-- Custom styling plus plugins -->
         <link href="assets/css/custom.css" rel="stylesheet">
         <link href="assets/css/icheck/flat/green.css" rel="stylesheet" />
         <link href="assets/css/datatables/tools/css/dataTables.tableTools.css" rel="stylesheet">
-        <link href="assets/css/smart_home_custom.css" rel="stylesheet">
+        <!--<link href="assets/css/smart_home_custom.css" rel="stylesheet">-->
         <script src="assets/js/jquery.min.js"></script>
     </head>
     <body class="nav-md">
@@ -32,7 +33,7 @@
                 <?php echo $this->element('menu_left'); ?>
                 <?php echo $this->element('menu_top'); ?>
                 <!-- page content -->
-                <div class="right_col" <?php if($this->params['controller'] == 'pages' && $this->action == 'index'){echo "style='height: 1200px !important'";} ?>>
+                <div class="right_col" style="height: 1300px !important">
                     <div class="">
                         <div class="page-title">
                             <div class="title_left">

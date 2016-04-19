@@ -3,7 +3,6 @@
 App::uses("AppModel", "Model");
 
 class Month extends AppModel {
-
     public $useTable = 'month';
     public $primaryKey = 'id';
     public $hasMany = array(
@@ -12,11 +11,5 @@ class Month extends AppModel {
             'foreignKey' => 'month_id',
             'dependent' => true
         ),
-        'WeekEnergy' => array(
-            'className' => 'WeekEnergy',
-            'foreignKey' => 'month_id',
-            'dependent' => true
-        )
     );
-
 }

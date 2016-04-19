@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("Asia/Bangkok");
 $config['version'] = '1.0';
 $base_folder = '@' . str_replace(APP_DIR . '/' . WEBROOT_DIR . '/' . 'index.php', '', $_SERVER['PHP_SELF']);
 $base_folder = str_replace('@/', '', $base_folder);
@@ -17,23 +17,23 @@ define('LANG_PATH', LIB_PATH . 'lang/');
 define('LOG_PATH', APP_PATH . 'log/');
 define('DIR_NAME', basename(BASE_PATH));
 
-if (strrpos(__FILE__, "/Applications/XAMPP") !== false) {
+//if (strrpos(__FILE__, "/Applications/XAMPP") !== false) {
     define('SYSTEM_ENVIRONMENT', 'localhost');
-} else {
-    define('SYSTEM_ENVIRONMENT', 'production');
-}
+//} else {
+//    define('SYSTEM_ENVIRONMENT', 'production');
+//}
 // Load app/Lib files
-if ($handle = opendir(LIB_PATH)) {
-    while (false !== ($entry = readdir($handle))) {
-        if (preg_match("/^(?:[a-zA-Z0-9_]+)(?:\\.php)?$/", $entry, $matches)) {
-            $lib = str_replace('.php', '', $entry);
-            App::import('Lib', $lib);
-        }
-    }
-    closedir($handle);
-}
+// if ($handle = opendir(LIB_PATH)) {
+//     while (false !== ($entry = readdir($handle))) {
+//         if (preg_match("/^(?:[a-zA-Z0-9_]+)(?:\\.php)?$/", $entry, $matches)) {
+//             $lib = str_replace('.php', '', $entry);
+//             App::import('Lib', $lib);
+//         }
+//     }
+//     closedir($handle);
+// }
 App::uses('Linklib', 'Lib/linklib');
-
+App::import('Lib', 'Lib/GetTime.php');
 function is_localhost() {
     return SYSTEM_ENVIRONMENT == 'localhost';
 }
@@ -82,6 +82,7 @@ define('ADMIN_DEFAULT_URL', ADMIN_HOME_URL);
 /* API (LinkLib) */
 define('LINKLIB_SECRET_KEY', 'K34eJjEt');
 define('API_SECRET_KEY', LINKLIB_SECRET_KEY);
+define('TIMEOUT_REQUEST_API',5);
 
 $config['title'] = array(
     'device' => array(
@@ -95,7 +96,9 @@ $config['title'] = array(
         'show' => 'Thông tin cá nhân'
     ),
     'electronic' => array(
-        'index' => 'Danh sách thiết bị điện'
+        'index' => 'Danh sách thiết bị điện',
+        'show' => 'Nhật ký hoạt động của thiết bị ',
+        'add' => "Thêm thiết bị điện"
     ),
 );
 $config['image_dir'] = WWW_ROOT . 'uploads/images/';
@@ -106,3 +109,14 @@ $config['type'] = array(
     'light' => 1,
     'term' => 2,
 );
+$config['module_wifi_ip'] = '192.168.43.9:333';
+$config['day_week'] = array(
+    'Mon' => "Thứ 2",
+    'Tue' => "Thứ 3",
+    'Wed' => "Thứ 4",
+    'Thu' => "Thứ 5",
+    'Fri' => "Thứ 6",
+    'Sat' => "Thứ 7",
+    'Sun' => "Chủ nhật"
+);
+error_reporting(E_ALL ^ E_STRICT);

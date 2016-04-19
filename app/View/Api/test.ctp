@@ -2,7 +2,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <? echo $this->element('x_title') ?>
-            <div class="x_content">
+            <div class="x_content" id="test-api">
                 <br>
                 <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" action="api/test">
                     <div class="item form-group">
@@ -81,7 +81,7 @@
                                     <?php if (!empty($client_query_arr)){ ?>
                                     <?php foreach($client_query_arr as $param => $value){ ?>
                                     <tr>
-                                        <td>-</td>
+                                        <td class="remove-param">-</td>
                                         <td><input type="text" name="params[]" class="form-control" placeholder="Param" value="<?php echo $param;?>"></td>
                                         <td><input type="text" name="values[]" class="form-control" placeholder="Value" value="<?php echo $value;?>"></td>
                                     </tr>
@@ -114,7 +114,7 @@
 <script>
     $(document).ready(function () {
         $('#more_param').click(function () {
-            var new_row_html = '<tr><td>[-]</td><td><input class="form-control" type="text" name="params[]" placeholder="Param"></td>\n\
+            var new_row_html = '<tr><td class="remove-param">[-]</td><td><input class="form-control" type="text" name="params[]" placeholder="Param"></td>\n\
                                 <td><input class="form-control" type="text" name="values[]" placeholder="Value"></td></tr>';
             if ($('#paramTable tr:last') != null) {
                 $('#paramTable tr:last').after(new_row_html);
@@ -135,7 +135,7 @@
                 $("#params-body").empty();
                 console.log(data);
                 $.each(data, function (key, value) {
-                    var new_row_html = '<tr><td>[-]</td><td><input class="form-control" type="text" name="params[]" value="'+ key +'"></td>\n\
+                    var new_row_html = '<tr><td class="remove-param">[-]</td><td><input class="form-control" type="text" name="params[]" value="'+ key +'"></td>\n\
                                 <td><input class="form-control" type="text" name="values[]" value="'+value+'"></td></tr>';
                     $("#params-body").append(new_row_html);
                 });
@@ -143,6 +143,10 @@
             }).fail(function (jqXHR, textStatus) {
                 console.log('fail');
             });
+        });
+        
+        $('#test-api').on('click', '.remove-param', function(){
+            $(this).parent().remove();
         });
     });
 </script>

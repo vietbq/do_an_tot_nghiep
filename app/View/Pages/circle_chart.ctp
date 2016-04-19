@@ -1,7 +1,7 @@
 <?php
 ?>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
                 <h2>Đồ thị tiêu thụ năng lượng<small>Theo các thiết bị điện</small></h2>
@@ -17,17 +17,17 @@
                 <div class="row" style="border-bottom: 1px solid #E0E0E0; padding-bottom: 5px; margin-bottom: 5px;">
                     <div class="col-md-12">
                         <div class="row" style="text-align: center;">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <canvas id="canvasDoughnut-day"></canvas>
-                                <h4 style="margin:0">Trong ngày</h4>
+                                <h4 style="margin:0">Trong ngày (<? echo Configure::read('day_week')[date("D",time())]; ?>)</h4>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <canvas id="canvasDoughnut-week"></canvas>
-                                <h4 style="margin:0">Trong tuần</h4>
+                                <h4 style="margin:0">Trong tuần <? echo GetTime::getWeeks(time()); ?></h4>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <canvas id="canvasDoughnut-month"></canvas>
-                                <h4 style="margin:0">Trong tháng</h4>
+                                <h4 style="margin:0">Trong tháng <? echo GetTime::getMonth(time()); ?></h4>
                             </div>
                         </div>
                     </div>

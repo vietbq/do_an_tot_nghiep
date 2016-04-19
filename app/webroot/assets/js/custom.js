@@ -81,9 +81,9 @@ if ($(".progress .progress-bar")[0]) {
 if ($(".js-switch")[0]) {
     var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
     elems.forEach(function (html) {
-        var switchery = new Switchery(html, {
-            color: '#26B99A'
-        });
+//        var switchery = new Switchery(html, {
+//            color: '#26B99A'
+//        });
     });
 }
 /** ******  /switcher  *********************** **/
@@ -312,15 +312,15 @@ $(function () {
 /** ******  Accordion  *********************** **/
 
 /** ******  scrollview  *********************** **/
-$(document).ready(function () {
-
-    $(".scroll-view").niceScroll({
-        touchbehavior: true,
-        cursorcolor: "rgba(42, 63, 84, 0.35)"
-    });
-
-});
-/** ******  /scrollview  *********************** **/
+//$(document).ready(function () {
+//
+//    $(".scroll-view").niceScroll({
+//        touchbehavior: true,
+//        cursorcolor: "rgba(42, 63, 84, 0.35)"
+//    });
+//
+//});
+///** ******  /scrollview  *********************** **/
 
 /** ******  NProgress  *********************** **/
 if (typeof NProgress != 'undefined') {
@@ -333,3 +333,25 @@ if (typeof NProgress != 'undefined') {
     });
 }
 /** ******  NProgress  *********************** **/
+$(document).ready(function () {
+    $('#list-electronic').on('click', '.switchery', function(){
+        var status = $(this).attr('rel');
+        var id = $(this).attr('data');
+        var _switch = $(this);
+        $.ajax({
+            url: 'electronics/change_status/'+id+'/'+ status,
+            dataType: 'json',
+            success: function(doc) {
+                if(status == '0'){
+                    _switch.removeClass('switch-off-btn').addClass('switch-on-btn').attr('rel',1);
+                }else{
+                    _switch.removeClass('switch-on-btn').addClass('switch-off-btn').attr('rel',0);
+                }
+            },
+            error: function(error){
+                alert("Đã xảy ra lỗi khi truyền tín hiệu!");
+            }
+        });
+
+    });
+});

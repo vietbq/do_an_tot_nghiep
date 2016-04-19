@@ -5,6 +5,7 @@
 * and open the template in the editor.
 */
 ?>
+<div class="row">
 <div class="x_panel">
     <?php echo $this->element("x_title") ?>
     <div class="x_content">
@@ -13,29 +14,76 @@
                 <div class="tile-stats">
                     <div class="icon"><i class="fa fa-clock-o"></i>
                     </div>
-                    <div class="count">10<?php echo $unit ?></div>
-                    <h3>Thứ 4</h3>
+                    <div class="count"><?php echo $sum[0].$unit ?></div>
+                    <h3><? echo Configure::read('day_week')[date("D",time())]; ?></h3>
                     <p>Năng lượng tiêu thụ trong ngày.</p>
-                </div>
-            </div>
-            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-calendar-o"></i>
-                    </div>
-                    <div class="count">179<?php echo $unit ?></div>
-
-                    <h3>Tuần 1</h3>
-                    <p>Năng lượng tiêu thụ trong tuần.</p>
                 </div>
             </div>
             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                     <div class="icon"><i class="fa fa-calendar"></i>
                     </div>
-                    <div class="count">1790<?php echo $unit ?></div>
+                    <div class="count"><?php echo $sum[1].$unit ?></div>
 
-                    <h3>Tháng 3</h3>
+                    <h3>Tuần <? echo GetTime::getWeeks(time()); ?></h3>
+                    <p>Năng lượng tiêu thụ trong tuần.</p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-calendar-o"></i>
+                    </div>
+                    <div class="count"><?php echo $sum[2].$unit ?></div>
+
+                    <h3>Tháng <? echo GetTime::getMonth(time()); ?></h3>
                     <p>Năng lượng tiêu thụ trong tháng.</p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-plug"></i>
+                    </div>
+                    <div class="count"><?php echo $num[0] ?> Thiết bị</div>
+
+                    <h3></h3>
+                    <p>Số lượng thiết bị điện.</p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-fire"></i>
+                    </div>
+                    <div class="count">Nhiệt độ</div>
+
+                    <h3></h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Cảm biến</th>
+                                <th>Phòng</th>
+                                <th>Nhiệt độ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($t_array as $t){ ?>
+                            <tr>
+                                <td><? echo $t['Electronic']['name'];  ?></td>
+                                <td><? echo $t['Electronic']['room'];  ?></td>
+                                <td><? echo $t['Electronic']['term'];  ?>°C</td>
+                            </tr>
+                            <? } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-eyedropper"></i>
+                    </div>
+                    <div class="count"><?php echo $num[1] ?> Cảm biến</div>
+
+                    <h3></h3>
+                    <p>Số lượng cảm biến nhiệt</p>
                 </div>
             </div>
         </div>
@@ -45,9 +93,6 @@
 <?php include "circle_chart.ctp" ?>
 <script src="assets/js/moment/moment.min.js"></script>
 <script src="assets/js/chartjs/chart.min.js"></script>
-<!--<script src="assets/js/progressbar/bootstrap-progressbar.min.js"></script>-->
-<!--<script src="assets/js/nicescroll/jquery.nicescroll.min.js"></script>-->
-
 <script>
     function getDataChart(input) {
         var data = {

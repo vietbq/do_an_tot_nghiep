@@ -113,3 +113,6 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 Configure::load('config');
+
+App::import('Lib','GetTime');
+

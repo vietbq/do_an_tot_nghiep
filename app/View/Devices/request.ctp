@@ -7,7 +7,7 @@
             <div class="clear"></div>
             <? echo $this->element('data_show'); ?>
             <div class="dataTables_filter" id="example_filter">
-                <label>Search all columns: <input type="text" aria-controls="example"></label>
+                <button id='accept-all' class="btn btn-warning">Cho phép tất cả </button>
             </div>
             <table id="example" class="table table-striped responsive-utilities jambo_table dataTable" aria-describedby="example_info">
                 <thead>
@@ -28,7 +28,8 @@
                             <td><? echo $v['Device']['name'] ?></td>
                             <td><? echo $v['Device']['device_id'] ?></td>
                             <td><? echo $v['Device']['created_at'] ?></td>
-                            <td class="last"><a href="#">View</a></td>
+                            <td class="last"> <a type="button" class='accept-device' 
+                                rel='<? echo $v["Device"]["id"] ?>'>Cho phép</a></td>
                         </tr>
                     <? } ?>
                 </tbody>
@@ -42,6 +43,32 @@
         $('input.tableflat').iCheck({
             checkboxClass: 'icheckbox_flat-green',
             radioClass: 'iradio_flat-green'
+        });
+
+        $('.accept-device').click(function(){
+            var device = $(this);
+            $.ajax({
+                url: 'devices/accept/' + device.attr('rel'),
+                success: function(data){
+                    device.parent().parent().remove();
+                },
+                error: function(error){
+                    alert("Đã xảy ra lỗi");
+                }
+            });
+
+        });
+
+        $('#accept-all').click(function(){
+            $.ajax({
+                url: 'devices/accept_all',
+                success: function(data){
+                    $('tbody').remove();
+                },
+                error: function(error){
+                    alert("Đã xảy ra lỗi");
+                }
+            });
         });
     });
 </script>
